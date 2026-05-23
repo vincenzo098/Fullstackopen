@@ -8,20 +8,17 @@ const Header = ({content}) => {
 
 
 
-const Button = ({onClick, text}) => {
-  return(
-    <>
-      <button onClick={() => onClick(text)}>{text}</button>
-    </>
-  )
-}
+const Button = ({onClick, text}) => <button onClick={() => onClick(text)}>{text}</button>
 
-const Statistics = ({good, neutral, bad}) =>{
+const Statistics = ({good, neutral, bad, total}) =>{
   return(
     <>
     <p>good {good}</p>
     <p>neutral {neutral}</p>
     <p>bad {bad}</p>
+    <p>all {total}</p>
+    <p>average {total !== 0 ? (good - bad)/(total) : 0}</p>
+    <p>positive {total !== 0 ? (good / total) * 100 : 0} %</p>
     </>
   )
 }
@@ -32,6 +29,7 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  const totalFeedback = good + neutral + bad
 
   const handleClick = (feedback) => {
     if (feedback === 'good') setGood(good + 1)
@@ -46,7 +44,7 @@ const App = () => {
       <Button onClick={handleClick} text={'neutral'} />
       <Button onClick={handleClick} text={'bad'} />
       <Header content = {'statistics'} />
-      <Statistics good={good} neutral={neutral} bad={bad}/>
+      <Statistics good={good} neutral={neutral} bad={bad} total={totalFeedback}/>
     </div>
   )
 }
