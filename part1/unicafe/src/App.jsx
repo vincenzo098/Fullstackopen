@@ -1,8 +1,6 @@
 import { useState } from 'react'
 
-const Header = ({content}) => (
-  <h1>{content}</h1>
-)
+const Header = ({content}) =>  (<h1>{content}</h1>)
 
 
 
